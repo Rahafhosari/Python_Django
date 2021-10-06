@@ -15,7 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
+from django.conf.urls import url
+import djangoapi.views
+import djangoapi.api_views
+
+# from django.views.generic import TemplateView
+# from djangoapi import endpoints
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',include('djangoapi.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+
+    #________ API Routes ________#
+    path('api/v1/people',djangoapi.api_views.PersonList.as_view()),
+    path('api/v1/people/new',djangoapi.api_views.PersonCreate.as_view()),
+    # path('api/v1/people/<int:id>/destroy',djangoapi.api_views.PersonDestroy.as_view()),
+    ##refactored url for destroy and update
+    path('api/v1/people/<int:id>/',djangoapi.api_views.PersonRetrieveUpdateDestroy.as_view()),
+
+
+
+    # url(r'^api/', include(endpoints)),
+    # url(r'^', TemplateView.as_view(template_name="index.html")),
 ]
