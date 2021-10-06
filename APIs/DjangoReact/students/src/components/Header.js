@@ -1,0 +1,12 @@
+import React from "react";
+
+const Header = () => {
+    return (
+    <div className="text-center">
+        <h1><i>App with React + Django </i></h1>
+        <hr></hr>
+    </div>
+    );
+}
+
+export default Header;
