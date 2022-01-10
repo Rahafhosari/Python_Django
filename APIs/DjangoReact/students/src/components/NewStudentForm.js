@@ -2,16 +2,20 @@ import React, {useState} from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
 import axios from "axios";
-
 import { API_URL } from "../constants";
 
-const NewStudentForm = (props) => {
+import "react-router";
+import { Link } from "react-router-dom";
 
+const NewStudentForm = (props) => {
+    const [initialName,initialEmail,initialDocument,initialPhone] = props
     const [pk, setPk] = useState(0)
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [document, setDocument] = useState("")
-    const [phone, setPhone] = useState("")
+    const [name, setName] = useState(initialName)
+    const [email, setEmail] = useState(initialEmail)
+    const [document, setDocument] = useState(initialDocument)
+    const [phone, setPhone] = useState(initialPhone)
+
+
 
     const {student, resetState, toggle} = props
 // const onSubmitHandler = e => {
@@ -33,31 +37,32 @@ const NewStudentForm = (props) => {
 
 const createStudent = e => {
     e.preventDefault();
-    axios.post('http://localhost:8000/api/students', 
+    axios.post('http://localhost:8000/api/students', {
         pk,
         name,
         email,
         document,
         phone
-    )
+    })
     .then(() => {
-        resetState();
-        toggle();
+        onSubmitProp({pk,name,email,document,phone})
     });
+  
 };
 
 const editStudent = e => {
     e.preventDefault();
-    axios.put('http://localhost:8000/api/students' + pk, 
+    axios.put('http://localhost:8000/api/students' + pk, {
         name,
         email,
         document,
         phone
-    )
+    })
     .then(() => {
         resetState();
         toggle();
-    });
+    })
+    
 };
 
 // const defaultIfEmpty = (value) => {
@@ -83,7 +88,7 @@ return (
             type="email"
             name="email"
             onChange={(e)=>setEmail(e.target.value)}
-            value = {student.email}
+            // value = {student.email}
             // value={defaultIfEmpty(email)}
             />
         </FormGroup>
@@ -93,7 +98,7 @@ return (
             type="text"
             name="document"
             onChange={(e)=>setDocument(e.target.value)}
-            value = {student.document}
+            // value = {student.document}
             // value={defaultIfEmpty(document)}
             />
         </FormGroup>
@@ -103,7 +108,7 @@ return (
             type="text"
             name="phone"
             onChange={(e)=>setPhone(e.target.value)}
-            value = {student.phone}
+            // value = {student.phone}
             // value={defaultIfEmpty(phone)}
             />
         </FormGroup>

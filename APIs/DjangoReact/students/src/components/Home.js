@@ -10,7 +10,6 @@ const Home = () => {
 
   const [students, setStudents] = useState([])
 
-  
   useEffect( () => {
     axios.get('http://localhost:8000/api/students')
         .then(response => setStudents((response.data)))
@@ -23,16 +22,8 @@ const Home = () => {
           <Col>
             <StudentList
               students={students}
-              // resetState={this.resetState}
+              // resetState={resetState}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            {/* <NewStudentModal 
-              create={true} 
-              // resetState={this.resetState} 
-            /> */}
           </Col>
         </Row>
       </Container>

@@ -1,2 +1,11 @@
 Built-in class-based views API¶
 https://docs.djangoproject.com/en/1.11/ref/class-based-views/
+
+Python: check if key exists in dictionary (6 Ways)
+https://thispointer.com/python-how-to-check-if-a-key-exists-in-dictionary/
+
+Python Null Example: What Is None In Python
+https://appdividend.com/2019/08/16/null-object-in-python-example-python-null-value-tutorial/
+
+Django Reading Excel:
+https://pythoncircle.com/post/591/how-to-upload-and-process-the-excel-file-in-django/

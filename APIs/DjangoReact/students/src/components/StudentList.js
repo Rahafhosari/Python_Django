@@ -1,12 +1,15 @@
 import React from "react";
-import { Table } from "reactstrap";
+import { Table, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 import NewStudentModal from "./NewStudentModal";
 import ConfirmRemovalModal from "./ConfirmRemovalModal";
 
 const StudentList = (props) => {
     const {students} = props
 
+    //New created student carried by props
+    
     return (
+      <>
       <Table dark>
         <thead>
           <tr>
@@ -34,11 +37,11 @@ const StudentList = (props) => {
                 <td>{student.phone}</td>
                 <td>{student.registrationDate}</td>
                 <td align="center">
-                  <NewStudentModal
+                  {/* <NewStudentModal
                     create={false}
                     student={student}
                     // resetState={this.props.resetState}
-                  />
+                  /> */}
                   &nbsp;&nbsp;
                   <ConfirmRemovalModal
                     pk={student.pk}
@@ -49,7 +52,25 @@ const StudentList = (props) => {
             ))
           )}
         </tbody>
-      </Table>
+    
+      <div>
+        <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
+          Add New Student
+        </Button>
+        <UncontrolledCollapse toggler="#toggler">
+          <Card>
+            <CardBody>
+              <NewStudentModal
+                create={false}
+                // student={student}
+                // resetState={this.props.resetState}
+              />
+            </CardBody>
+          </Card>
+        </UncontrolledCollapse>
+      </div>
+        </Table>
+      </>
     );
 }
 

@@ -26,7 +26,7 @@ class PersonCreate(CreateAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
 
-'''THe Retrieve Update Destroy is used instead'''
+'''The Retrieve Update Destroy is used instead'''
 # class PersonDestroy(DestroyAPIView):
 #     queryset = Person.objects.all()
 #     lookup_field = 'id'

@@ -1,47 +1,45 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, Component, Fragment } from "react";
 import { Modal, ModalHeader, Button, ModalFooter } from "reactstrap";
 
 import axios from "axios";
 
 import { API_URL } from "../constants";
 
-class ConfirmRemovalModal extends Component {
-  state = {
-    modal: false
-  };
+const ConfirmRemovalModal = () => {
 
-  toggle = () => {
-    this.setState(previous => ({
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => {
+    setModal(previous => ({
       modal: !previous.modal
     }));
   };
 
-  deleteStudent = pk => {
+  const deleteStudent = pk => {
     axios.delete(API_URL + pk).then(() => {
-      this.props.resetState();
-      this.toggle();
+      // this.props.resetState();
+      toggle();
     });
   };
 
-  render() {
     return (
       <Fragment>
-        <Button color="danger" onClick={() => this.toggle()}>
+        <Button color="danger" onClick={() => toggle()}>
           Remove
         </Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>
             Do you really wanna delete the student?
           </ModalHeader>
 
           <ModalFooter>
-            <Button type="button" onClick={() => this.toggle()}>
+            <Button type="button" onClick={() => toggle()}>
               Cancel
             </Button>
             <Button
               type="button"
               color="primary"
-              onClick={() => this.deleteStudent(this.props.pk)}
+              onClick={() => deleteStudent(this.props.pk)}
             >
               Yes
             </Button>
@@ -49,7 +47,6 @@ class ConfirmRemovalModal extends Component {
         </Modal>
       </Fragment>
     );
-  }
 }
 
 export default ConfirmRemovalModal;
